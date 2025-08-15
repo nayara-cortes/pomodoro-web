@@ -11,7 +11,7 @@ main {
 }
 
 .default-background {
-    background-image: url("/assets/default-background.avif");
+    background-image: url("/assets/default-background.png");
     position: fixed;
     top: 0;
     left: 0;
@@ -42,6 +42,7 @@ main {
     margin-top: 2vh;
 }
 
+/* comentario */
 
 .session {
     display: flex;
