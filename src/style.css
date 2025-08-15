@@ -1,0 +1,742 @@
+body {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.default-background {
+    background-image: url("/assets/default-background.avif");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;  
+    background-size: cover;
+    z-index: -1;   
+}
+
+
+.user-circle {
+    /* position: absolute; */
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 100px;
+    opacity: 50%;
+    margin-left: 91.8vw;
+}
+
+.user {
+    /* position: absolute; */
+    width: 4vw;
+    height: 4vh;
+    color: white;
+    opacity: 50%;
+    margin-left: 93vw;
+    margin-top: 2vh;
+}
+
+
+.session {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 30%;
+    max-width: 500px;
+    font-size: 1em;
+    font-family: "Inter";
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+#focus-btn { 
+    flex: 1;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+#short-break-btn { 
+    flex: 1;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 20%;
+}
+
+#long-break-btn { 
+    flex: 1;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 20%;
+}
+
+
+
+.active-phase {
+    all: unset;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 700;
+}
+
+.inactive-phase {
+    all: unset;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.6);   
+}
+
+
+
+.timer-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    width: 38%;
+    max-width: 600px;
+    min-width: 300px;
+    aspect-ratio: 5 / 3;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 1.5%;
+    background-color: white;
+    border-radius: 100px;
+    opacity: 50%;
+} 
+
+.progress-made {
+    background-color: #ED6AFF;
+    width: 10%;
+    height: 100%;
+    border-radius: 100px;
+}
+
+
+.time-display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: clamp(1rem, 8rem, 9em);
+    font-family: "Inter";
+    margin-top: 2%;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+/* ---------------------------- TAREAS -----------------------------*/
+.task-list {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 15vh;
+    overflow-y: auto;   
+}
+
+/* Scrollbar de task list */
+.task-list::-webkit-scrollbar {
+    width: 6px; /* grosor */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+}
+
+.task-list::-webkit-scrollbar-track {
+    background: transparent; /* fondo */
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3); /* color barra */
+    border-radius: 10px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+#task-list-ul {
+    list-style: none;
+    margin-top: 0;
+    margin-right: 4vw;
+}
+
+#task-list-ul li {
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.2vh;
+}
+
+#task-list-ul li:hover:not(.li-new-task) {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+}
+
+#task-list-ul li:hover .task-options-btn {
+    visibility: visible;
+}
+
+.li-hover-persistent {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+}
+
+.task-options-btn:hover {
+    visibility: visible;
+}
+
+.task-text {
+    font-family: "Inknut Antiqua";
+    font-weight: 200;
+    font-size: clamp(0.5em, 0.8em, 1em);
+    line-height: 1em;
+}
+
+.task-checkbox {
+    flex: 0 0 auto;
+    vertical-align: middle;
+    content: "";
+    width: 1rem;
+    aspect-ratio: 1 / 1;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 4px; 
+    margin-right: 1vw;
+    cursor: pointer;
+    align-items: flex-start;
+}
+
+.task-options-btn {
+    all: unset;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 0.5vw;
+    padding-left: 0.5vw;
+    padding-bottom: 0.7vh;
+    border-radius: 100px;
+    height: 20px;
+    width: 20px;
+    visibility: hidden;
+}
+
+.task-options-menu {
+    /* position: absolute;  */
+    left: 87%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    z-index: 100;
+    width: 6em;
+}
+
+.task-delete-option {
+    font-family: "Inknut Antiqua";
+    font-size: 0.8em;
+    color: white;
+    cursor: pointer;
+    padding-left: 1em;
+    padding-right: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.task-delete-option:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+.task-completed-checkbox::after {
+    content: "✓"; /* También puedes usar ✓ o cualquier otro símbolo */
+    color: white;
+    opacity: 60%;
+    font-size: 1em;
+    display: block;
+    text-align: center;
+    line-height: 1.2em; /* Igual que el alto del span para centrarlo */
+}
+
+.task-completed-text {
+    color: rgba(255, 255, 255, 0.6);
+    /* position: relative; */
+    font-style: italic;
+    font-weight: 100;
+}
+.task-completed-text::after {
+    content: "";
+    /* position: absolute; */
+    top: 50%;  
+    left: 0%;
+    width: 100%;
+    height: 1px;  
+    background-color: white; 
+    z-index: 1; 
+}
+
+
+#add-task-btn {
+    all: unset;
+    cursor: pointer;
+
+    width: 25%;
+    aspect-ratio: 4 / 1;
+
+
+    background-color: rgba(255, 255, 255, 0.15); /*Color del botón*/
+    color: rgba(255, 255, 255, 0.6);  /*Color de texto*/
+    border-radius: 100px;
+    font-size: 0.8em;
+    font-family: "Inter";
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+#add-task-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4); /*Color del botón*/
+    font-weight: 600;
+    color: white;
+}
+
+
+
+.task-text-input {
+    all: unset;
+    font-family: "Inknut Antiqua";
+    font-weight: 200;
+    font-size: clamp(0.5em, 0.8em, 1em);
+    color: white;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.5);
+    line-height: 1em; /* Haz que coincida con .task-text */
+    width: 80%;
+    max-width: 80%;
+}
+.task-text-input:focus {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.5);
+}
+
+
+
+/* TIMER BUTTONS */
+.controls { /* Controls container*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 15%;
+    max-width: 200px;
+    aspect-ratio: 4 / 1;
+    border-radius: 100px;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.restart-btn,
+.start-btn,
+.pause-btn,
+.config-timer-btn {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    font: inherit; /* mantiene tipografía del contenedor */
+    color: inherit; /* mantiene color del contenedor */
+    cursor: pointer;
+}
+    
+
+.restart-btn {
+    flex: 1;
+    width: 5%;
+    padding-left: 1rem;
+}
+
+.start-btn {
+    flex: 1;
+}
+
+.pause-btn {
+    flex: 1;
+    display: none;
+}
+
+.config-timer-btn {
+    flex: 1;
+    padding-right: 1rem;
+}
+
+.config-display {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: clamp(10em, 50%, 45rem);
+    height: clamp(25em, 40%, 30rem);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    z-index: 1000;
+    font-family: "Inter";
+    font-size: small;
+
+    border-radius: 60px;
+}
+
+#short-text-short-break {
+    display: none;
+}
+
+#short-text-long-break {
+    display: none;
+}
+.config-title {
+    position: fixed;
+    font-size: clamp(0.2em, 2em, 3rem);
+
+}
+.config-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px); 
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+/* Menú de configuración */
+.config-options {
+    width: 35%;
+    height: fit-content;
+    border-right: 2px solid rgba(255, 255, 255, 0.6);
+    margin-left: 2em;
+}
+
+/* Botones del menú de configuración  */
+.config-options button{
+    all: unset;
+    cursor: pointer;
+    display: block;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 8%;
+    padding-right: 2%;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.config-options button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 80px;
+    width: 80%;
+}
+
+#timer-settings {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: 10%;
+    gap: 0px;
+}
+
+#phaseTime-settings {
+    display: flex;
+    width: 80%;
+    height: 30%;
+
+    
+}
+
+#config-minutes {
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 20%;
+}
+
+#config-seconds {
+    margin-left: 6%;
+    margin-top: 5%;
+    width: 20%;
+}
+
+.input-time-config-text {
+    margin-bottom: 0%;
+    font-family: "Inknut Antiqua";
+    font-size: 300;
+    margin-left: 10%;
+}
+
+.input-timer {
+    all: unset;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 50%;
+    border-radius: 8px;
+    font-size: large;
+    margin-top: 0%;
+    text-align: center;
+    margin-left: 20%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    
+}
+
+.config-options button.selected {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 80px;
+    width: 80%;
+}
+
+.config-options button.selected:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 80px;
+    width: 80%;
+}
+
+#save-timer-settings {
+    all: unset;
+    cursor: pointer;
+    width: 20%;
+    height: 10%;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-family: "Inknut Antiqua";
+    font-size: 100;
+    text-align: center;
+    border-radius: 20px;
+    margin-left: 30%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+}
+
+#save-timer-settings:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.config-timer-option {
+    top: 45%;
+    margin-left: 5%;
+    font-family: "Inknut Antiqua";
+}
+
+.long-interval-input {
+    all: unset;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 2.5em;
+    height: 2em;
+    border-radius: 8px;
+    font-size: 150;
+    text-align: center;
+    font-family:"Inter";
+}
+
+#auto-breaks {
+    position: relative;
+    margin-top: 5%;
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    font-family: "Inknut Antiqua";
+}
+
+.switch-container input[type="checkbox"] {
+    /* position: absolute; */
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin-right: 0;
+}
+
+.switch-track {
+    width: 45px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.switch-track::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+/* Estado ON */
+input[type="checkbox"]:checked + .switch-track {
+    background-color: #4caf50;
+}
+
+input[type="checkbox"]:checked + .switch-track::after {
+    transform: translateX(20px);
+}
+
+
+.to-come-settings {
+    position: absolute;
+    font-family: "Inknut Antiqua";
+    font-size: large;
+}
+
+/* Para móviles */
+@media (max-width: 500px) {
+    .session {
+        width: 80%;
+        gap: 0.2rem;
+        font-size: 0.7rem;
+    }
+
+    
+    .controls {
+        width: 100%;
+        aspect-ratio: 5 / 1;
+    }
+
+    .time-display {
+        font-size: 5em;
+    }
+    
+    .task-text {
+        font-size: 0.5em;
+    }
+
+    .task-text-input {
+        font-size: 0.5em;
+    }
+
+    #add-task-btn {
+        width: 40%;
+    }
+
+    .config-display {
+        width: 100%;
+        height: 60%;
+    }
+
+    .config-options {
+        margin-left: 1em;
+        font-size: x-small;
+        padding-right: 1em;
+    }
+
+    #short-text-short-break {
+        display: inline;
+    }
+
+    #short-text-long-break {
+        display: inline;
+    }
+
+    #long-text-short-break {
+        display: none;
+    }
+
+    #long-text-long-break {
+        display: none;
+    }
+
+}
+
+@media (min-width: 501px) and (max-width: 767px) {
+    .session {
+        width: 60%;
+    }
+
+    .timer-box {
+        width: 80%;
+    }
+
+    .controls {
+        width: 40%;
+        aspect-ratio: 5 / 1;
+    }
+
+    .time-display {
+        font-size: 7em;
+    }
+
+    .task-text {
+        font-size: clamp(0.2em, 0.6em, 0.6em);
+    }
+
+    #add-task-btn {
+        margin-top: 2rem;
+    }
+
+    .task-text-input {
+        font-size: clamp(0.2em, 0.6em, 0.6em);
+    }
+
+    .config-display {
+        width: 100%;
+        height: 60%;
+    }
+
+    
+}
+
+
+/* Para tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .session {
+        width: 50%;
+        gap: 0.3rem;
+    }
+
+    .timer-box {
+        width: 70%;
+    }
+
+
+    .controls {
+        width: 30%;
+        aspect-ratio: 5 / 1;
+    }
+
+    .config-display {
+        width: 80%;
+        height: 60%;
+    }
+}
