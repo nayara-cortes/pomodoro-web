@@ -118,7 +118,8 @@ main {
     aspect-ratio: 5 / 3;
 }
 
-.progress-bar {
+/* .progress-bar {
+    margin-top: 2rem;
     width: 80%;
     height: 1.5%;
     background-color: white;
@@ -131,7 +132,7 @@ main {
     width: 10%;
     height: 100%;
     border-radius: 100px;
-}
+} */
 
 
 .time-display {
