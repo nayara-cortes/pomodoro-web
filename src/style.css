@@ -216,7 +216,7 @@ main {
     font-family: "Inknut Antiqua";
     font-weight: 200;
     font-size: clamp(0.5em, 0.8em, 1em);
-    line-height: 1em;
+    line-height: 1.5em;
 }
 
 .task-checkbox {
